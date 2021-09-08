@@ -57,10 +57,18 @@ echo $(dir)
 7. Get unique IDs from columns. Check if anything is weird. 
 ```
 cut -f 1 *_sorted | sort | uniq | tee columnkey.txt
-head columnkey.txt
 ```
 The file should look like this
 ```
+AA11.hmm
+AA1_2.hmm
+AA12.hmm
+AA1_3.hmm
+AA13.hmm
+AA14.hmm
+CBM32.hmm
+CBM35.hmm
+CBM38.hmm
 ```
 8. Join all files and replace blanks with 0s. Make sure column key is first in the order before all other file names. 
 ```
