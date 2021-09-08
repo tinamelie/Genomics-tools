@@ -1,4 +1,4 @@
-# Purpose: Identify, filter, and count CAZyme families and subfamilies from a protein fasta.
+## Purpose: Identify, filter, and count CAZyme families and subfamilies from a protein fasta.
 
 1. Find CAZymes with coverage > 0.45 and e-value <1e-17 from proteins.fasta file using HMMER - these parameters are suggested for fungi. This takes about 3-5 hours depending on CAZy content. I'm not sure multiple nodes/tasks if you're running a slurm really helps.
 
