@@ -1,4 +1,4 @@
-## Purpose: This will identify, filter, and count CAZyme families and subfamilies within a protein fasta with [dbCAN](http://bcb.unl.edu/dbCAN2/download/) and merge results of multiple genomes into a single CSV. This will find cazymes with coverage > 0.45 and e-value <1e-17 from proteins.fasta file using HMMER - these parameters are suggested for fungi.
+### Purpose: Identify, filter, and count CAZyme families and subfamilies within a protein fasta with [dbCAN](http://bcb.unl.edu/dbCAN2/download/) and merge results of multiple genomes into a single CSV. This will find cazymes with coverage > 0.45 and e-value <1e-17 from proteins.fasta file using HMMER - these parameters are suggested for fungi.
 
 1. Find CAZymes with dbCAN. This takes about 3-5 hours depending on CAZy content. I'm not sure multiple nodes/tasks if you're running a slurm really helps.
 
