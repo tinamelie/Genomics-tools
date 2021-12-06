@@ -1,4 +1,4 @@
-#Use these commands to process all your output files from eggnog. This assumes that they are all in the same folder and names {species}.emapper.annotations
+#Use these commands to process all your output files from eggnog. This assumes that they are all in the same folder and named {species}.emapper.annotations
 
 # When all the files have been processed, run part two in the folder to combine all of the counts into one file.
 
