@@ -42,7 +42,7 @@ awk 'NR==1 { print "Name", FILENAME }; 1' "$file.temp" > $file.out; done
 source ~/.hmmer
 
 # Convert *.out files to tab-delimited
-ls *.out | parallel 'csvtk space2tab {} > {.}out.tsv'
+ls *.out | parallel 'csvtk space2tab {} > {.}.tsv'
 
 #Ignore - this probably isn't needed: sort the contents of all the .tsv files in your directory
 #for file in *.tsv;
@@ -54,7 +54,7 @@ echo $(dir)
 
 # get unique ids for columns. IMPORTANT!!!!! check if anything is weird!!!!!!!
 
-cut -f 1 *.out.tsv | sort | uniq | tee columnkey.txt
+cut -f 1 *.tsv | sort | uniq | tee columnkey.txt
 
 #You'll paste the output from echo $(dir) for the file names.
 # This will join all files and replace blanks with 0s. Make sure column key is first in the order before all other file names. 
