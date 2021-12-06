@@ -1,0 +1,68 @@
+#Use these commands to process all your output files from eggnog. This assumes that they are all in the same folder and names {species}.emapper.annotations
+
+# When all the files have been processed, run part two in the folder to combine all of the counts into one file.
+
+for file in *.emapper.annotations;
+  do 
+# Remove the top 6 header lines
+tail -n +6  < ${file} |
+
+# Remove the bottom 3 lines
+head -n -3 |
+
+# Remove all columns except query and eggnogOGS
+awk '{ print $1, $5}' |
+
+# Remove everything after the |
+sed 's/[|].*$//' |
+
+### Not sure if this is necessary, so feel free to comment out
+# Remove everything after @
+sed 's/[@].*$//' |
+
+#Generate unique counts of COGs/KOGs
+awk '{print $2}' | sort | uniq -c |
+
+#Swap columns so IDs are first
+awk ' { t = $1; $1 = $2; $2 = t; print; } ' > ${file}.temp
+
+#Add the file name to the first column. This will be helpful when youcombine the output of all the files. 
+
+awk 'NR==1 { print "Name", FILENAME }; 1' "$file.temp" > $file.out; done
+
+
+--------
+
+# Part 2: 
+
+# Once all the files have been processed, run this in their folder. This will process all files ending with .trim in the folder and create one file which includes the values from each file. 
+
+# Make sure you have sourced ~/.hmmer for csvtk to work
+
+source ~/.hmmer
+
+# Convert *.out files to tab-delimited
+ls *.out | parallel 'csvtk space2tab {} > {.}out.tsv'
+
+#Ignore - this probably isn't needed: sort the contents of all the .tsv files in your directory
+#for file in *.tsv;
+ # do 
+#sort  < ${file} > ${file}_sorted; done
+
+#get the names of your files
+echo $(dir)
+
+# get unique ids for columns. IMPORTANT!!!!! check if anything is weird!!!!!!!
+
+cut -f 1 *.out.tsv | sort | uniq | tee columnkey.txt
+
+#You'll paste the output from echo $(dir) for the file names.
+# This will join all files and replace blanks with 0s. Make sure column key is first in the order before all other file names. 
+
+csvtk join -t -k columnkey.txt file1 file2 --na 0 |
+
+# Flip so species names are headers
+tac > all_COG_count.tsv
+
+#  convert to csv - possibly better for R?
+csvtk tab2csv all_COG_count.tsv > all_COG_count.csv
