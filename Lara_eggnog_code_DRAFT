@@ -56,7 +56,7 @@ echo $(dir)
 
 cut -f 1 *.tsv | sort | uniq | tee columnkey.txt
 
-#You'll paste the output from echo $(dir) for the file names.
+#You'll paste the output from echo $(dir) for the file names - ie replace "file1" and "file2" below.
 # This will join all files and replace blanks with 0s. Make sure column key is first in the order before all other file names. 
 
 csvtk join -t -k columnkey.txt file1 file2 --na 0 |
