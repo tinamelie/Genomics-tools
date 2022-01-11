@@ -49,6 +49,7 @@ sort  < ${file} > ${file}_sorted; done
 ```
 mkdir ../presort_cazy
 mv *.tsv ../presort_cazy
+mv *.out ../presort_cazy
 ```
 5. Get the names of the file in the directory
 ```
